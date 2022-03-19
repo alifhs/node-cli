@@ -1,9 +1,10 @@
-
+// const chalk = require('chalk');
 function parseSentence(words) {  
     var sentence = "";  
     for(var i = 1; i < words.length; i++) {  
          sentence = sentence + words[i] + " ";  
     }
+    return sentence;
 }
 
 const usage = "\nUsage: tran <lang_name> sentence to be translated";
@@ -16,9 +17,10 @@ function showHelp() {
 }
 
 function showAll(){  
-    console.log(chalk.magenta.bold("\nLanguage Name\t\tISO-639-1 Code\n"))  
+    console.log(("\nLanguage Name\t\tISO-639-1 Code\n"))  
+    // console.log(chalk.magenta.bold("\nLanguage Name\t\tISO-639-1 Code\n"))  
     for(let [key, value] of languages) {  
- console.log(key + "\\t\\t" + value + "\\n")  
+ console.log(`${key} \t \t ${ value } \n`)  
     }  
 }
 
@@ -131,4 +133,16 @@ languages.set('xhosa',         'xh')
 languages.set('yiddish',        'yi')  
 languages.set('yoruba',         'yo')  
 languages.set('zulu',    'zu')
-module.exports = { showAll: showAll, showHelp: showHelp, parseSentence: parseSentence};
+function parseLanguage (language) {                                                                    
+    if(language.length == 2){  
+ return language;  
+    }  
+    if(languages.has(language)){  
+ return languages.get(language)  
+    }  
+    else {  
+ console.error("Language not supported!")  
+ return; //returning null if the language is unsupported.  
+    }  
+};
+module.exports = { showAll: showAll, showHelp: showHelp, parseSentence: parseSentence, parseLanguage};
