@@ -19,6 +19,7 @@ const options = yargs
     }
       if(yargs.argv._[0] == null){  
         utils.showHelp();  
+        process.exit(1);
        
     }
 
